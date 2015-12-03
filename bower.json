@@ -1,0 +1,22 @@
+{
+  "name": "workflow",
+  "description": "Default workflow for app",
+  "main": "index.html",
+  "authors": [
+    "severjason ssever2010@gmail.com"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.6"
+  }
+}
