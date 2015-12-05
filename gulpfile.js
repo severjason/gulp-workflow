@@ -13,15 +13,18 @@ const gulp = require('gulp'),
  */
 const path = {
     scss: 'app/scss/**/*.scss',
-    images:'app/images/**/*.+(png|jpg|gif|svg)',
-    fonts :['bower_components/bootstrap-sass/assets/fonts/**/*'],
-    js:['app/js/**/*.js']
+    images: 'app/images/**/*.+(png|jpg|gif|svg)',
+    fonts: ['bower_components/bootstrap-sass/assets/fonts/**/*'],
+    libJs: [
+        'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'],
+    js: ['app/js/**/*.js']
 };
 
 /**
  *  Browser sync
  */
-gulp.task('browserSync', function() {
+gulp.task('browserSync', function () {
     browserSync({
         server: {
             baseDir: 'app'
@@ -32,7 +35,7 @@ gulp.task('browserSync', function() {
 /**
  *  All paths
  */
-gulp.task('css', function() {
+gulp.task('css', function () {
     return gulp.src(path.scss)
         .pipe($.sourcemaps.init())
         .pipe($.sass({outputStyle: 'expanded'}))
@@ -45,9 +48,17 @@ gulp.task('css', function() {
 });
 
 /**
+ *  AMove all bower js files to app/lib
+ */
+gulp.task('js', function () {
+    return gulp.src(path.libJs)
+        .pipe(gulp.dest('app/lib'));
+});
+
+/**
  *  Concat all js and css into one file
  */
-gulp.task('useref', function(){
+gulp.task('useref', function () {
     return gulp.src('app/*.html')
         .pipe($.useref())
         .pipe($.if('*.js', $.uglify()))
@@ -58,7 +69,7 @@ gulp.task('useref', function(){
 /**
  *  Move all images to dist
  */
-gulp.task('img', function(){
+gulp.task('img', function () {
     return gulp.src(path.images)
         .pipe($.cache($.imagemin({
             interlaced: true
@@ -67,17 +78,18 @@ gulp.task('img', function(){
 });
 
 /**
- *  AMove all fonts to dist
+ *  AMove all fonts to dist and app
  */
-gulp.task('fonts', function() {
+gulp.task('fonts', function () {
     return gulp.src(path.fonts)
-        .pipe(gulp.dest('dist/fonts'))
+        .pipe(gulp.dest('app/fonts'))
+        .pipe(gulp.dest('dist/fonts'));
 });
 
 /**
  *  Delete dist folder
  */
-gulp.task('clean', function(callback) {
+gulp.task('clean', function (callback) {
     del('dist');
     return $.cache.clearAll(callback);
 });
@@ -85,14 +97,14 @@ gulp.task('clean', function(callback) {
 /**
  *  Delete all in dist folder except images
  */
-gulp.task('clean:dist', function(callback){
+gulp.task('clean:dist', function (callback) {
     del(['dist/**/*', '!dist/images', '!dist/images/**/*'], callback)
 });
 
 /**
  *  Watch task - for sass
  */
-gulp.task('watch', ['browserSync','css'],function(){
+gulp.task('watch', ['browserSync', 'css'], function () {
     gulp.watch(path.scss, ['css']);
 });
 
@@ -107,5 +119,5 @@ gulp.task('build', function () {
  *  Default task
  */
 gulp.task('default', function () {
-    runSequence(['css','browserSync', 'watch'])
+    runSequence(['css', 'js', 'fonts', 'browserSync', 'watch'])
 });
