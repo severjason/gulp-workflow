@@ -1,0 +1,18 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,*:before, *:after {
+  box-sizing: inherit;
+}
+
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a:hover,a:focus {
+  text-decoration: none;
+}
