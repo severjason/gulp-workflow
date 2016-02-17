@@ -62,7 +62,7 @@ gulp.task('useref', function () {
     return gulp.src('app/*.html')
         .pipe($.useref())
         .pipe($.if('*.js', $.uglify()))
-        .pipe($.if('*.css', $.minifyCss()))
+        .pipe($.if('*.css', $.cssnano()))
         .pipe(gulp.dest('dist'));
 });
 
