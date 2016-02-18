@@ -5,6 +5,9 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
+body {
+  font-size: 1.8rem; }
+
 img {
   display: block;
   max-width: 100%; }
