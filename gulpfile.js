@@ -61,6 +61,9 @@ gulp.task('js', function () {
 gulp.task('useref', function () {
     return gulp.src('app/*.html')
         .pipe($.useref())
+        .pipe($.if('*.js', $.babel({
+            presets: ['es2015']
+        })))
         .pipe($.if('*.js', $.uglify()))
         .pipe($.if('*.css', $.cssnano()))
         .pipe(gulp.dest('dist'));
