@@ -18,5 +18,8 @@
   ],
   "dependencies": {
     "bootstrap-sass": "bootstrap-sass-official#~3.3.6"
+  },
+  "devDependencies": {
+    "html5shiv": "^3.7.3"
   }
 }
