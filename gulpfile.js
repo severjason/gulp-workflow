@@ -13,13 +13,13 @@ const gulp = require('gulp'),
  */
 const path = {
     app: 'app',
-    scss: this.app + '/scss/**/*.scss',
-    images: this.app + '/images/**/*.+(png|jpg|gif|svg)',
+    scss: 'app/scss/**/*.scss',
+    images: 'app/images/**/*.*+(png|jpeg|jpg|svg|gif)',
     fonts: ['bower_components/bootstrap-sass/assets/fonts/**/*'],
     libJs: [
         'bower_components/jquery/dist/jquery.min.js',
         'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'],
-    js: [this.app + '/js/**/*.js']
+    js: ['app/js/**/*.js']
 };
 
 /**
@@ -28,7 +28,7 @@ const path = {
 gulp.task('browserSync', function () {
     browserSync({
         server: {
-            baseDir: path.app
+            baseDir: path.app + "/"
         }
     });
 });
@@ -55,7 +55,7 @@ gulp.task('css', function () {
 });
 
 /**
- *  AMove all bower js files to app/lib
+ *  Move all bower js files to app/lib
  */
 gulp.task('js', function () {
     return gulp.src(path.libJs)
@@ -66,7 +66,7 @@ gulp.task('js', function () {
  *  Concat all js and css into one file
  */
 gulp.task('useref', function () {
-    return gulp.src(path.app + '/*.html')
+    return gulp.src(path.app + '/**/*.html')
         .pipe($.useref())
         .pipe($.if('*.js', $.babel({
             presets: ['es2015']
@@ -82,7 +82,9 @@ gulp.task('useref', function () {
 gulp.task('img', function () {
     return gulp.src(path.images)
         .pipe($.cache($.imagemin({
-            interlaced: true
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: false
         })))
         .pipe(gulp.dest('dist/images'))
 });
@@ -116,6 +118,7 @@ gulp.task('clean:dist', function (callback) {
  */
 gulp.task('watch', ['browserSync', 'css'], function () {
     gulp.watch(path.scss, ['css']);
+    gulp.watch(["app/*.html","app/scss/*.scss"]).on('change', browserSync.reload);
 });
 
 /**
