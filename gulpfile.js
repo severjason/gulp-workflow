@@ -17,8 +17,10 @@ const path = {
     images: 'app/images/**/*.*+(png|jpeg|jpg|svg|gif)',
     fonts: ['bower_components/bootstrap-sass/assets/fonts/**/*'],
     libJs: [
-        'bower_components/jquery/dist/jquery.min.js',
-        'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'],
+        /*'bower_components/fabric.js/dist/fabric.min.js',
+         'bower_components/jquery/dist/jquery.min.js',
+         'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'*/
+    ],
     js: ['app/js/**/*.js']
 };
 
@@ -59,7 +61,7 @@ gulp.task('css', function () {
  */
 gulp.task('js', function () {
     return gulp.src(path.libJs)
-        .pipe(gulp.dest(path.app + '/lib'));
+        .pipe(gulp.dest('dist/lib'));
 });
 
 /**
@@ -125,7 +127,7 @@ gulp.task('watch', ['browserSync', 'css'], function () {
  *  Task to builds an app for production
  */
 gulp.task('build', function () {
-    runSequence(['css', 'useref', 'img', 'fonts'])
+    runSequence(['css', 'useref','js', 'img', 'fonts'])
 });
 
 /**
