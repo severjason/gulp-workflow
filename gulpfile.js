@@ -30,7 +30,10 @@ const path = {
 gulp.task('browserSync', function () {
     browserSync({
         server: {
-            baseDir: path.app + "/"
+            baseDir: path.app + "/",
+            routes: {
+                '/bower_components': 'bower_components'
+            }
         }
     });
 });
