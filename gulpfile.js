@@ -1,6 +1,3 @@
-/**
- * Created by severjason on 01.12.2015.
- */
 
 const gulp = require('gulp'),
     browserSync = require('browser-sync'),
@@ -44,11 +41,6 @@ gulp.task('browserSync', function () {
 gulp.task('css', function () {
     return gulp.src(path.scss)
         .pipe($.sourcemaps.init())
-        .pipe($.compass({
-            config_file: './config.rb',
-            css: path.app + '/css',
-            sass: path.app + '/scss'
-        }))
         //.pipe($.sass({outputStyle: 'expanded'}))
         .pipe($.sass({outputStyle: 'compressed'}))
         .on('error', $.sass.logError)
