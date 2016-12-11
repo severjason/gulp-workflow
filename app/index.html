@@ -60,7 +60,7 @@
 
     <h2>Sub-heading</h2>
 
-    <ul>
+    <ul class="alert-danger">
         <li>List item</li>
         <li>List item</li>
         <li>List item</li>
@@ -88,13 +88,19 @@
 
     <div>Page footer content</div>
 
-    <small>Copyright &copy; <time datetime="2015">2015</time></small>
+    <small>Copyright &copy; <time datetime="2016">2016</time></small>
 
 </footer>
-<!--build:js js/main.min.js -->
-<script src="./lib/jquery.min.js"></script>
-<script src="./lib/bootstrap.min.js"></script>
-<script src="./js/main.js"></script>
+
+<!--build:js libs/jquery.min.js defer -->
+<script defer src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- endbuild -->
+<!--build:js libs/bootstrap.min.js defer -->
+<script defer src="../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+<!-- endbuild -->
+<!--build:js js/main.min.js defer -->
+<script defer src="js/main.js"></script>
+<script defer src="ts/compiled/main.js"></script>
 <!-- endbuild -->
 </body>
 </html>
