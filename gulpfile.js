@@ -23,7 +23,7 @@
         app: 'app/',
         scss: 'app/scss/**/*.scss',
         images: 'app/images/**/*.*+(png|jpeg|jpg|svg|gif)',
-        fonts: ['bower_components/bootstrap-sass/assets/fonts/**/*'],
+        fonts: ['node_modules/bootstrap-sass/assets/fonts/**/*'],
         ts: ['app/ts/**/*.ts'],
         tsCompiled: 'ts/compiled/',
         js: ['app/js/**/*.js']
@@ -37,7 +37,7 @@
             server: {
                 baseDir: path.app,
                 routes: {
-                    '/bower_components': 'bower_components'
+                    '/node_modules': 'node_modules'
                 }
             }
         });
