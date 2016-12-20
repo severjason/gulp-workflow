@@ -74,10 +74,10 @@
     gulp.task('useref', function () {
         return gulp.src(path.app + '**/*.html')
             .pipe(useref())
-            .pipe(gulpIf(['*.js', path.tsCompiled + "*.js"], babel({
+            .pipe(gulpIf('*.js', babel({
                 presets: ['es2015']
             })))
-            .pipe(gulpIf(['*.js', path.tsCompiled + "*.js"], uglify()))
+            .pipe(gulpIf('*.js', uglify()))
             .pipe(gulpIf('*.css', cssNano()))
             .pipe(gulp.dest('dist'));
     });
